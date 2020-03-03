@@ -10,7 +10,6 @@ ARG KAFKA_VERSION=2.4.0
 ARG KAFKA_DIST=kafka_2.13-2.4.0
 
 RUN set -x \
-    && mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && apt-get update \
     && apt-get install -y openjdk-8-jre-headless wget \
     && apt-get autoremove -y \
