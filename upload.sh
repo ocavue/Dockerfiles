@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -ex
+
+ORIGIN_DOCKER_IMAGE=$1
+TARGET_DOCKER_IMAGE=$2
+
+docker pull $ORIGIN_DOCKER_IMAGE
+docker image ls
+docker tag $ORIGIN_DOCKER_IMAGE $TARGET_DOCKER_IMAGE
+docker push $TARGET_DOCKER_IMAGE

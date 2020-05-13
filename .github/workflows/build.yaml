@@ -11,13 +11,11 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v2
 
-      - name: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0
+      - name: upload
         run: |
           docker login -u $username -p $password
-          docker pull quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0
-          docker image ls
-          docker tag quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0 $username/nginx-ingress-controller:0.32.0
-          docker push $username/nginx-ingress-controller:0.32.0
+          ./upload.sh quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0 $username/nginx-ingress-controller:0.32.0
+          ./upload.sh quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.29.0 $username/nginx-ingress-controller:0.29.0
         env:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
