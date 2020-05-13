@@ -1,0 +1,16 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  docker:
+    runs-on: "ubuntu-18.04"
+    steps:
+      - name: Checkout code repository
+        uses: actions/checkout@v2
+
+      - name: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0
+        run: |
+          docker pull quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0
