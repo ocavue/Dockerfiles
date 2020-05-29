@@ -15,7 +15,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-          repository: ocavue/protoc
+          repository: ${{ secrets.DOCKER_USERNAME }}/protoc
           tags: "3.11.4"
           path: protoc/3.11.4
 
