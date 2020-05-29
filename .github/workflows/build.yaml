@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
           repository: ocavue/protoc
           tags: "3.11.4"
-          path: protoc/3.11.4/Dockerfile
+          path: protoc/3.11.4
 
       - name: upload
         run: |
