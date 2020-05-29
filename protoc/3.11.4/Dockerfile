@@ -1,7 +1,7 @@
 FROM golang:1.14-stretch
 
 WORKDIR /data/build/
-RUN apt-get upgrade && apt-get install unzip
+RUN apt-get update && apt-get install -y unzip
 
 ENV PROTOC_ZIP=protoc-3.11.4-linux-x86_64.zip
 RUN curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-linux-x86_64.zip
