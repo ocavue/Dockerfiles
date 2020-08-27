@@ -1,4 +1,4 @@
-FROM golang:1.15-stretch as builder
+FROM golang:1.15-buster as builder
 WORKDIR /data/
 
 # install unzip
