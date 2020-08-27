@@ -33,6 +33,6 @@ COPY --from=builder /go/bin/protoc-gen-go           /usr/local/bin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inject-tag
 COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-validate
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
-RUN chmod +x /usr/local/bin/proto*
 RUN ls -lrth /usr/local/bin/proto*
+RUN chmod +x /usr/local/bin/proto*
 RUN npm install -g typescript@3
