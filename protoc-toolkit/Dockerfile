@@ -1,4 +1,4 @@
-FROM golang:1.14-stretch as builder
+FROM golang:1.15-stretch as builder
 WORKDIR /data/
 
 # install unzip
@@ -34,4 +34,5 @@ COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inj
 COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-validate
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
 RUN chmod +x /usr/local/bin/proto*
+RUN ls -lrth /usr/local/bin/proto*
 RUN npm install -g typescript@3
