@@ -11,14 +11,14 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v2
 
-      - name: protoc/3.12.3
+      - name: protoc-toolkit
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-          repository: ${{ secrets.DOCKER_USERNAME }}/protoc
-          tags: "3.12.3"
-          path: protoc/3.12.3
+          repository: ${{ secrets.DOCKER_USERNAME }}/protoc-toolkit
+          tags: "0.1.0"
+          path: protoc-toolkit
 
       - name: upload
         run: |
