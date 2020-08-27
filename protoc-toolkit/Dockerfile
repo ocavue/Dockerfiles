@@ -26,7 +26,7 @@ RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
 RUN go get github.com/ocavue/protoc-gen-typescript
 
 
-FROM node:14-buster
+FROM node:14-buster-slim
 RUN npm install -g typescript@3
 COPY --from=builder /usr/local/bin/protoc           /usr/local/bin/protoc
 COPY --from=builder /go/bin/protoc-gen-go           /usr/local/bin/protoc-gen-go
