@@ -25,6 +25,9 @@ RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
 # install /go/bin/protoc-gen-typescript
 RUN go get github.com/ocavue/protoc-gen-typescript
 
+# install /go/bin/protoc-gen-gotemplate
+RUN go get moul.io/protoc-gen-gotemplate
+
 
 FROM node:14-buster-slim
 RUN npm install -g typescript@3
@@ -33,4 +36,5 @@ COPY --from=builder /go/bin/protoc-gen-go           /usr/local/bin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inject-tag
 COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-validate
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
+COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
 RUN ls -lrth /usr/local/bin/proto*
