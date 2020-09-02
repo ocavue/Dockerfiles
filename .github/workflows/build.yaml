@@ -19,6 +19,7 @@ jobs:
           repository: ${{ secrets.DOCKER_USERNAME }}/protoc-toolkit
           tags: "0.3.1,latest"
           path: protoc-toolkit
+          always_pull: true
 
       - name: upload
         run: |
