@@ -10,23 +10,25 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     mv /tmp/protoc/bin/protoc /usr/local/bin/ && \
     chmod +x /usr/local/bin/protoc
 
+RUN go env -w GO111MODULE=on
+
 # install /go/bin/protoc-gen-go
-RUN go get github.com/golang/protobuf/protoc-gen-go
+RUN go get -v github.com/golang/protobuf/protoc-gen-go
 
 # install /go/bin/protoc-go-inject-tag
-RUN go get github.com/favadi/protoc-go-inject-tag
+RUN go get -v github.com/favadi/protoc-go-inject-tag
 
 # install /go/bin/protoc-gen-validate
 # installing PGV can currently only be done from source
-RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
+RUN go get -d -v github.com/envoyproxy/protoc-gen-validate && \
     cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
     make build
 
 # install /go/bin/protoc-gen-typescript
-RUN go get github.com/ocavue/protoc-gen-typescript
+RUN go get -v github.com/ocavue/protoc-gen-typescript
 
 # install /go/bin/protoc-gen-gotemplate
-RUN go get moul.io/protoc-gen-gotemplate
+RUN go get -v moul.io/protoc-gen-gotemplate
 
 
 FROM node:14-buster-slim
