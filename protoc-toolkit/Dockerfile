@@ -30,8 +30,7 @@ RUN go get -u -v moul.io/protoc-gen-gotemplate
 
 
 FROM node:14-buster-slim
-RUN npm install -g typescript@3
-RUN npm cache clean
+RUN npm install -g typescript@3 && npm cache clean
 COPY --from=builder /usr/local/bin/protoc           /usr/local/bin/protoc
 COPY --from=builder /go/bin/protoc-gen-go           /usr/local/bin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inject-tag
