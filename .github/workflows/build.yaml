@@ -20,11 +20,11 @@ jobs:
           tags: "0.5.1,latest"
           path: protoc-toolkit
 
-      - name: upload
-        run: |
-          docker login -u $username -p $password
-          ./upload.sh quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0 $username/nginx-ingress-controller:0.32.0
-          ./upload.sh quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.29.0 $username/nginx-ingress-controller:0.29.0
-        env:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+      # - name: upload
+      #   run: |
+      #     docker login -u $username -p $password
+      #     ./upload.sh quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.32.0 $username/nginx-ingress-controller:0.32.0
+      #     ./upload.sh quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.29.0 $username/nginx-ingress-controller:0.29.0
+      #   env:
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
