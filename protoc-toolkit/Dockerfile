@@ -30,7 +30,8 @@ RUN go get -u -v moul.io/protoc-gen-gotemplate
 
 
 FROM node:14-buster-slim
-RUN npm install -g typescript@3 && npm cache clean
+RUN apt-get update && apt-get install -y clang-format && apt-get clean
+RUN npm install -g typescript@3 && npm cache clean --force
 COPY --from=builder /usr/local/bin/protoc           /usr/local/bin/protoc
 COPY --from=builder /go/bin/protoc-gen-go           /usr/local/bin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inject-tag
@@ -38,4 +39,3 @@ COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-va
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
 COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
 RUN ls -lrth /usr/local/bin/proto*
-RUN apt-get update && apt-get install -y clang-format && apt-get clean
