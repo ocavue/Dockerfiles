@@ -37,4 +37,5 @@ COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inj
 COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-validate
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
 COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
+RUN apt-get update && apt-get install -y clang-format && apt-get clean
 RUN ls -lrth /usr/local/bin/proto*
