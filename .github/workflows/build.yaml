@@ -11,12 +11,12 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v2
 
-      - name: Pre-pull image
-        run: |
-          docker pull $username/protoc-toolkit
-        env:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+      # - name: Pre-pull image
+      #   run: |
+      #     docker pull $username/protoc-toolkit
+      #   env:
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       - name: protoc-toolkit
         uses: docker/build-push-action@v1
