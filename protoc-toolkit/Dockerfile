@@ -11,19 +11,19 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     chmod +x /usr/local/bin/protoc
 
 # install /go/bin/protoc-gen-go
-RUN go get -u -v github.com/golang/protobuf/protoc-gen-go
+RUN go get -u -v google.golang.org/protobuf/cmd/protoc-gen-go
 
-# install /go/bin/protoc-go-inject-tag
-RUN go get -u -v github.com/favadi/protoc-go-inject-tag
+# # install /go/bin/protoc-go-inject-tag
+# RUN go get -u -v github.com/favadi/protoc-go-inject-tag
 
-# install /go/bin/protoc-gen-typescript
-RUN go get -u -v github.com/ocavue/protoc-gen-typescript
+# # install /go/bin/protoc-gen-typescript
+# RUN go get -u -v github.com/ocavue/protoc-gen-typescript
 
-# install /go/bin/protoc-gen-gotemplate
-RUN go get -u -v moul.io/protoc-gen-gotemplate
+# # install /go/bin/protoc-gen-gotemplate
+# RUN go get -u -v moul.io/protoc-gen-gotemplate
 
-# install /go/bin/protolint
-RUN go get -u -v github.com/yoheimuta/protolint/cmd/protolint
+# # install /go/bin/protolint
+# RUN go get -u -v github.com/yoheimuta/protolint/cmd/protolint
 
 # install /go/bin/protoc-gen-validate
 # installing PGV can currently only be done from source
