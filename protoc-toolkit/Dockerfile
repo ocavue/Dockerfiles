@@ -16,7 +16,7 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
 RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
     cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
     git checkout v0.4.1 && \
-    git status && \
+    git log -n 1 && \
     make build
 
 # install /go/bin/protoc-gen-go
