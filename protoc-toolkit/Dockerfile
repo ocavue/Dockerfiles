@@ -27,7 +27,7 @@ RUN go get -u -v github.com/yoheimuta/protolint/cmd/protolint
 
 # install /go/bin/protoc-gen-validate
 # installing PGV can currently only be done from source
-RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
+RUN go get -d github.com/envoyproxy/protoc-gen-validate@v0.4.1 && \
     cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
     git status && \
     make build
