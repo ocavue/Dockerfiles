@@ -28,6 +28,8 @@ RUN go get -u -v github.com/ocavue/protoc-gen-typescript
 # install /go/bin/protoc-gen-gotemplate
 RUN go get -u -v moul.io/protoc-gen-gotemplate
 
+# install /go/bin/protolint
+RUN go get -u -v github.com/yoheimuta/protolint/cmd/protolint
 
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
@@ -37,4 +39,5 @@ COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inj
 COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-validate
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
 COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
+COPY --from=builder /go/bin/protolint               /usr/local/bin/protolint
 RUN ls -lrth /usr/local/bin/proto*
