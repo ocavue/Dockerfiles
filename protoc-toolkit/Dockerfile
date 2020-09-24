@@ -10,6 +10,15 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     mv /tmp/protoc/bin/protoc /usr/local/bin/ && \
     chmod +x /usr/local/bin/protoc
 
+# install /go/bin/protoc-gen-validate
+# installing PGV can currently only be done from source
+# the latest version (as of 2020-09-24) has some issue, so I specify a version.
+RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
+    cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
+    git checkout v0.4.1 && \
+    git status && \
+    make build
+
 # install /go/bin/protoc-gen-go
 RUN go get -u -v github.com/golang/protobuf/protoc-gen-go
 
@@ -24,13 +33,6 @@ RUN go get -u -v moul.io/protoc-gen-gotemplate
 
 # install /go/bin/protolint
 RUN go get -u -v github.com/yoheimuta/protolint/cmd/protolint
-
-# install /go/bin/protoc-gen-validate
-# installing PGV can currently only be done from source
-RUN go get -d github.com/envoyproxy/protoc-gen-validate@v0.4.1 && \
-    cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
-    git status && \
-    make build
 
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
