@@ -18,6 +18,7 @@ RUN go get -u github.com/golang/protobuf/protoc-gen-go
 # the latest version (as of 2020-09-24) has some issue, so I specify a version.
 RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
     cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
+    git checkout v0.4.1 && \
     git log -n 1 && \
     make build
 
@@ -33,6 +34,9 @@ RUN go get -u moul.io/protoc-gen-gotemplate
 # install /go/bin/protolint
 RUN go get -u github.com/yoheimuta/protolint/cmd/protolint
 
+# install /go/bin/protoc-gen-json
+RUN go get -u sourcegraph.com/sourcegraph/prototools/cmd/protoc-gen-json
+
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
 COPY --from=builder /usr/local/bin/protoc           /usr/local/bin/protoc
@@ -42,4 +46,5 @@ COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-va
 COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
 COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
 COPY --from=builder /go/bin/protolint               /usr/local/bin/protolint
+COPY --from=builder /go/bin/protoc-gen-json         /usr/local/bin/protoc-gen-json
 RUN ls -lrth /usr/local/bin/proto*
