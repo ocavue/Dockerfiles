@@ -11,7 +11,7 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     chmod +x /usr/local/bin/protoc
 
 # install /go/bin/protoc-gen-go
-RUN go get -u -v github.com/golang/protobuf/protoc-gen-go
+RUN go get -u github.com/golang/protobuf/protoc-gen-go
 
 # install /go/bin/protoc-gen-validate
 # installing PGV can currently only be done from source
@@ -22,16 +22,16 @@ RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
     make build
 
 # install /go/bin/protoc-go-inject-tag
-RUN go get -u -v github.com/favadi/protoc-go-inject-tag
+RUN go get -u github.com/favadi/protoc-go-inject-tag
 
 # install /go/bin/protoc-gen-typescript
-RUN go get -u -v github.com/ocavue/protoc-gen-typescript
+RUN go get -u github.com/ocavue/protoc-gen-typescript
 
 # install /go/bin/protoc-gen-gotemplate
-RUN go get -u -v moul.io/protoc-gen-gotemplate
+RUN go get -u moul.io/protoc-gen-gotemplate
 
 # install /go/bin/protolint
-RUN go get -u -v github.com/yoheimuta/protolint/cmd/protolint
+RUN go get -u github.com/yoheimuta/protolint/cmd/protolint
 
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
