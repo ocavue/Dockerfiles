@@ -15,7 +15,6 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
 # the latest version (as of 2020-09-24) has some issue, so I specify a version.
 RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
     cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
-    git checkout v0.4.1 && \
     git log -n 1 && \
     make build
 
