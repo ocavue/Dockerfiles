@@ -50,4 +50,5 @@ COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-ty
 COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
 COPY --from=builder /go/bin/protolint               /usr/local/bin/protolint
 COPY --from=builder /go/bin/protoc-gen-json         /usr/local/bin/protoc-gen-json
+COPY --from=builder /go/bin/protoc-gen-setter       /usr/local/bin/protoc-gen-setter
 RUN ls -lrth /usr/local/bin/proto*
