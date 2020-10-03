@@ -37,6 +37,9 @@ RUN go get github.com/yoheimuta/protolint/cmd/protolint
 # install /go/bin/protoc-gen-json
 RUN go get sourcegraph.com/sourcegraph/prototools/cmd/protoc-gen-json
 
+# install /go/bin/protoc-gen-setter
+RUN go get github.com/codyaray/proto-go-setter/protoc-gen-setter
+
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
 COPY --from=builder /usr/local/bin/protoc           /usr/local/bin/protoc
