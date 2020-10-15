@@ -16,11 +16,12 @@ RUN go get github.com/golang/protobuf/protoc-gen-go
 # install /go/bin/protoc-gen-validate
 # installing PGV can currently only be done from source
 # the latest version (as of 2020-09-24) has some issue, so I specify a version.
-RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
-    cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
-    git checkout v0.4.1 && \
-    git log -n 1 && \
-    make build
+# RUN go get -d github.com/envoyproxy/protoc-gen-validate && \
+#     cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validate && \
+#     git checkout v0.4.1 && \
+#     git log -n 1 && \
+#     make build
+RUN go get github.com/envoyproxy/protoc-gen-validate
 
 # install /go/bin/protoc-go-inject-tag
 RUN go get github.com/favadi/protoc-go-inject-tag
