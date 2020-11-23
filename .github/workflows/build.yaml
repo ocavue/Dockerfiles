@@ -20,6 +20,15 @@ jobs:
       #     tags: "latest"
       #     path: protoc-toolkit
 
+      - name: node-with-coscmd
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/node-with-coscmd
+          tags: "14-buster"
+          path: node-with-coscmd
+
       # - name: kubectl
       #   uses: docker/build-push-action@v1
       #   with:
