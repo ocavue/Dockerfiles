@@ -48,6 +48,18 @@ RUN PREFIX="/usr/local" && \
         "https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m).tar.gz" | \
         tar -xvzf - -C "${PREFIX}" --strip-components 1
 
+# install /usr/local/bin/kubectl
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.10/bin/linux/amd64/kubectl && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl && \
+    kubectl version --client
+
+# install /usr/local/bin/gomplate
+RUN curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.8.0/gomplate_linux-amd64 && \
+    chmod 755 /usr/local/bin/gomplate && \
+    gomplate --version
+
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/bin/protoc
@@ -62,4 +74,7 @@ COPY --from=builder /go/bin/protoc-gen-setter               /usr/local/bin/proto
 COPY --from=builder /usr/local/bin/buf                      /usr/local/bin/buf
 COPY --from=builder /usr/local/bin/protoc-gen-buf-breaking  /usr/local/bin/protoc-gen-buf-breaking
 COPY --from=builder /usr/local/bin/protoc-gen-buf-lint      /usr/local/bin/protoc-gen-buf-lint
-RUN ls -lrth /usr/local/bin/proto*
+COPY --from=builder /usr/local/bin/kubectl                  /usr/local/bin/kubectl
+COPY --from=builder /usr/local/bin/gomplate                 /usr/local/bin/gomplate
+
+RUN ls -lrth /usr/local/bin/
