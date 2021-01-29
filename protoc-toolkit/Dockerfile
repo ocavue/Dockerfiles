@@ -63,8 +63,7 @@ RUN curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gompl
 # install /go/bin/revive
 RUN go get github.com/mgechev/revive
 
-FROM node:14-buster-slim
-RUN npm install -g typescript@3 && npm cache clean --force
+FROM golang:1.15-buster
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/bin/protoc
 COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/bin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-go-inject-tag            /usr/local/bin/protoc-go-inject-tag
