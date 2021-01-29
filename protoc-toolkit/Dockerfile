@@ -41,15 +41,25 @@ RUN go get sourcegraph.com/sourcegraph/prototools/cmd/protoc-gen-json
 # install /go/bin/protoc-gen-setter
 RUN go get github.com/codyaray/proto-go-setter/protoc-gen-setter
 
+# install /usr/local/bin/buf, /usr/local/bin/protoc-gen-buf-breaking, and /usr/local/bin/protoc-gen-buf-lint
+RUN PREFIX="/usr/local" && \
+    VERSION="0.36.0" && \
+    curl -sSL \
+        "https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m).tar.gz" | \
+        tar -xvzf - -C "${PREFIX}" --strip-components 1
+
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
-COPY --from=builder /usr/local/bin/protoc           /usr/local/bin/protoc
-COPY --from=builder /go/bin/protoc-gen-go           /usr/local/bin/protoc-gen-go
-COPY --from=builder /go/bin/protoc-go-inject-tag    /usr/local/bin/protoc-go-inject-tag
-COPY --from=builder /go/bin/protoc-gen-validate     /usr/local/bin/protoc-gen-validate
-COPY --from=builder /go/bin/protoc-gen-typescript   /usr/local/bin/protoc-gen-typescript
-COPY --from=builder /go/bin/protoc-gen-gotemplate   /usr/local/bin/protoc-gen-gotemplate
-COPY --from=builder /go/bin/protolint               /usr/local/bin/protolint
-COPY --from=builder /go/bin/protoc-gen-json         /usr/local/bin/protoc-gen-json
-COPY --from=builder /go/bin/protoc-gen-setter       /usr/local/bin/protoc-gen-setter
+COPY --from=builder /usr/local/bin/protoc                   /usr/local/bin/protoc
+COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/bin/protoc-gen-go
+COPY --from=builder /go/bin/protoc-go-inject-tag            /usr/local/bin/protoc-go-inject-tag
+COPY --from=builder /go/bin/protoc-gen-validate             /usr/local/bin/protoc-gen-validate
+COPY --from=builder /go/bin/protoc-gen-typescript           /usr/local/bin/protoc-gen-typescript
+COPY --from=builder /go/bin/protoc-gen-gotemplate           /usr/local/bin/protoc-gen-gotemplate
+COPY --from=builder /go/bin/protolint                       /usr/local/bin/protolint
+COPY --from=builder /go/bin/protoc-gen-json                 /usr/local/bin/protoc-gen-json
+COPY --from=builder /go/bin/protoc-gen-setter               /usr/local/bin/protoc-gen-setter
+COPY --from=builder /usr/local/bin/buf                      /usr/local/bin/buf
+COPY --from=builder /usr/local/bin/protoc-gen-buf-breaking  /usr/local/bin/protoc-gen-buf-breaking
+COPY --from=builder /usr/local/bin/protoc-gen-buf-lint      /usr/local/bin/protoc-gen-buf-lint
 RUN ls -lrth /usr/local/bin/proto*
