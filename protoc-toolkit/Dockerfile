@@ -60,6 +60,9 @@ RUN curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gompl
     chmod 755 /usr/local/bin/gomplate && \
     gomplate --version
 
+# install /go/bin/revive
+RUN go get github.com/mgechev/revive
+
 FROM node:14-buster-slim
 RUN npm install -g typescript@3 && npm cache clean --force
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/bin/protoc
@@ -76,5 +79,6 @@ COPY --from=builder /usr/local/bin/protoc-gen-buf-breaking  /usr/local/bin/proto
 COPY --from=builder /usr/local/bin/protoc-gen-buf-lint      /usr/local/bin/protoc-gen-buf-lint
 COPY --from=builder /usr/local/bin/kubectl                  /usr/local/bin/kubectl
 COPY --from=builder /usr/local/bin/gomplate                 /usr/local/bin/gomplate
+COPY --from=builder /go/bin/revive                          /usr/local/bin/revive
 
 RUN ls -lrth /usr/local/bin/
