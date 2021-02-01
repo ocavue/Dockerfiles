@@ -64,20 +64,19 @@ RUN curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gompl
 RUN go get github.com/mgechev/revive
 
 FROM golang:1.15-buster
-COPY --from=builder /usr/local/bin/protoc                   /usr/local/bin/protoc
-COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/bin/protoc-gen-go
-COPY --from=builder /go/bin/protoc-go-inject-tag            /usr/local/bin/protoc-go-inject-tag
-COPY --from=builder /go/bin/protoc-gen-validate             /usr/local/bin/protoc-gen-validate
-COPY --from=builder /go/bin/protoc-gen-typescript           /usr/local/bin/protoc-gen-typescript
-COPY --from=builder /go/bin/protoc-gen-gotemplate           /usr/local/bin/protoc-gen-gotemplate
-COPY --from=builder /go/bin/protolint                       /usr/local/bin/protolint
-COPY --from=builder /go/bin/protoc-gen-json                 /usr/local/bin/protoc-gen-json
-COPY --from=builder /go/bin/protoc-gen-setter               /usr/local/bin/protoc-gen-setter
-COPY --from=builder /usr/local/bin/buf                      /usr/local/bin/buf
-COPY --from=builder /usr/local/bin/protoc-gen-buf-breaking  /usr/local/bin/protoc-gen-buf-breaking
-COPY --from=builder /usr/local/bin/protoc-gen-buf-lint      /usr/local/bin/protoc-gen-buf-lint
-COPY --from=builder /usr/local/bin/kubectl                  /usr/local/bin/kubectl
-COPY --from=builder /usr/local/bin/gomplate                 /usr/local/bin/gomplate
-COPY --from=builder /go/bin/revive                          /usr/local/bin/revive
-
-RUN ls -lrth /usr/local/bin/
+COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
+COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/sbin/protoc-gen-go
+COPY --from=builder /go/bin/protoc-go-inject-tag            /usr/local/sbin/protoc-go-inject-tag
+COPY --from=builder /go/bin/protoc-gen-validate             /usr/local/sbin/protoc-gen-validate
+COPY --from=builder /go/bin/protoc-gen-typescript           /usr/local/sbin/protoc-gen-typescript
+COPY --from=builder /go/bin/protoc-gen-gotemplate           /usr/local/sbin/protoc-gen-gotemplate
+COPY --from=builder /go/bin/protolint                       /usr/local/sbin/protolint
+COPY --from=builder /go/bin/protoc-gen-json                 /usr/local/sbin/protoc-gen-json
+COPY --from=builder /go/bin/protoc-gen-setter               /usr/local/sbin/protoc-gen-setter
+COPY --from=builder /usr/local/bin/buf                      /usr/local/sbin/buf
+COPY --from=builder /usr/local/bin/protoc-gen-buf-breaking  /usr/local/sbin/protoc-gen-buf-breaking
+COPY --from=builder /usr/local/bin/protoc-gen-buf-lint      /usr/local/sbin/protoc-gen-buf-lint
+COPY --from=builder /usr/local/bin/kubectl                  /usr/local/sbin/kubectl
+COPY --from=builder /usr/local/bin/gomplate                 /usr/local/sbin/gomplate
+COPY --from=builder /go/bin/revive                          /usr/local/sbin/revive
+RUN ls -lrth /usr/local/sbin/
