@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
           repository: ${{ secrets.DOCKER_USERNAME }}/protoc-toolkit
-          tags: "0.13.0"
+          tags: "0.14.0"
           path: protoc-toolkit
 
       # - name: node-with-coscmd

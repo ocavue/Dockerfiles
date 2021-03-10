@@ -63,6 +63,9 @@ RUN curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gompl
 # install /go/bin/revive
 RUN go get github.com/mgechev/revive
 
+# install /usr/local/bin/golangci-lint
+RUN cd /usr/local/ && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.38.0
+
 FROM golang:1.15-buster
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
 COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/sbin/protoc-gen-go
@@ -79,4 +82,5 @@ COPY --from=builder /usr/local/bin/protoc-gen-buf-lint      /usr/local/sbin/prot
 COPY --from=builder /usr/local/bin/kubectl                  /usr/local/sbin/kubectl
 COPY --from=builder /usr/local/bin/gomplate                 /usr/local/sbin/gomplate
 COPY --from=builder /go/bin/revive                          /usr/local/sbin/revive
+COPY --from=builder /usr/local/bin/golangci-lint            /usr/local/sbin/golangci-lint
 RUN ls -lrth /usr/local/sbin/
