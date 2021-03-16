@@ -66,6 +66,14 @@ RUN go get github.com/mgechev/revive
 # install /usr/local/bin/golangci-lint
 RUN cd /usr/local/ && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.38.0
 
+# install /usr/bin/clang-format-12
+RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
+    echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
+    echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y clang-format-12 && \
+    clang-format-12 --version
+
 FROM golang:1.15-buster
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
 COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/sbin/protoc-gen-go
@@ -83,4 +91,5 @@ COPY --from=builder /usr/local/bin/kubectl                  /usr/local/sbin/kube
 COPY --from=builder /usr/local/bin/gomplate                 /usr/local/sbin/gomplate
 COPY --from=builder /go/bin/revive                          /usr/local/sbin/revive
 COPY --from=builder /usr/local/bin/golangci-lint            /usr/local/sbin/golangci-lint
+COPY --from=builder /usr/bin/clang-format-12                /usr/local/sbin/clang-format-12
 RUN ls -lrth /usr/local/sbin/
