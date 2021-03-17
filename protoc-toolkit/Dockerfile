@@ -11,7 +11,10 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     chmod +x /usr/local/bin/protoc
 
 # install /go/bin/protoc-gen-go
-RUN go get github.com/golang/protobuf/protoc-gen-go
+RUN go get google.golang.org/protobuf/cmd/protoc-gen-go
+
+# install /go/bin/protoc-gen-go-grpc
+RUN go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 # install /go/bin/protoc-gen-validate
 # installing PGV can currently only be done from source
@@ -77,6 +80,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
 FROM golang:1.15-buster
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
 COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/sbin/protoc-gen-go
+COPY --from=builder /go/bin/protoc-gen-go-grpc              /usr/local/sbin/protoc-gen-go-grpc
 COPY --from=builder /go/bin/protoc-go-inject-tag            /usr/local/sbin/protoc-go-inject-tag
 COPY --from=builder /go/bin/protoc-gen-validate             /usr/local/sbin/protoc-gen-validate
 COPY --from=builder /go/bin/protoc-gen-typescript           /usr/local/sbin/protoc-gen-typescript
