@@ -90,8 +90,8 @@ COPY --from=builder /usr/local/bin/kubectl                  /usr/local/sbin/kube
 COPY --from=builder /usr/local/bin/gomplate                 /usr/local/sbin/gomplate
 COPY --from=builder /go/bin/revive                          /usr/local/sbin/revive
 COPY --from=builder /usr/local/bin/golangci-lint            /usr/local/sbin/golangci-lint
-COPY --from=builder /usr/bin/clang-format-12                /usr/local/sbin/clang-format-12
 RUN ls -lrth /usr/local/sbin/
+
 # install /usr/bin/clang-format-12
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
