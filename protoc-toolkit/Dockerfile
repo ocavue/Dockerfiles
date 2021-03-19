@@ -1,5 +1,7 @@
-FROM golang:1.16-buster as builder
+FROM golang:1.16-buster as base
 WORKDIR /data/
+
+FROM base as builder
 
 # install unzip
 RUN apt-get update && apt-get install -y unzip
@@ -77,7 +79,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-get install -y clang-format-12 && \
     clang-format-12 --version
 
-FROM golang:1.15-buster
+FROM base
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
 COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/sbin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-gen-go-grpc              /usr/local/sbin/protoc-gen-go-grpc
