@@ -71,13 +71,6 @@ RUN go get github.com/mgechev/revive
 # install /usr/local/bin/golangci-lint
 RUN cd /usr/local/ && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.38.0
 
-# install /usr/bin/clang-format-12
-RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
-    echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get install -y clang-format-12 && \
-    clang-format-12 --version
 
 FROM base
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
@@ -99,3 +92,12 @@ COPY --from=builder /go/bin/revive                          /usr/local/sbin/revi
 COPY --from=builder /usr/local/bin/golangci-lint            /usr/local/sbin/golangci-lint
 COPY --from=builder /usr/bin/clang-format-12                /usr/local/sbin/clang-format-12
 RUN ls -lrth /usr/local/sbin/
+# install /usr/bin/clang-format-12
+RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
+    echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
+    echo "deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main" | tee -a /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y clang-format-12 && \
+    clang-format-12 --version && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/apt/lists
