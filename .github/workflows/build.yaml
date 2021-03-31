@@ -16,6 +16,8 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+        with:
+          buildkitd-flags: --debug
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -41,26 +43,26 @@ jobs:
       #       guanmaidocker/elasticsearch:7.10.1-prod.1
       #       ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-prod.1
 
-      # - name: elasticsearch-dev
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     platforms: linux/amd64
-      #     context: elasticsearch/7.10.1/
-      #     file: elasticsearch/7.10.1/dev.dockerfile
-      #     push: true
-      #     tags: |
-      #       guanmaidocker/elasticsearch:7.10.1-dev.1
-      #       ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-dev.1
-
-      - name: protoc-toolkit
+      - name: elasticsearch-dev
         uses: docker/build-push-action@v2
         with:
           platforms: linux/amd64
-          context: protoc-toolkit/
+          context: elasticsearch/7.10.1/
+          file: elasticsearch/7.10.1/dev.dockerfile
           push: true
           tags: |
-            guanmaidocker/protoc-toolkit:0.15.5
-            ccr.ccs.tencentyun.com/guanmai/protoc-toolkit:0.15.5
+            guanmaidocker/elasticsearch:7.10.1-dev.1
+            ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-dev.1
+
+      # - name: protoc-toolkit
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     platforms: linux/amd64
+      #     context: protoc-toolkit/
+      #     push: true
+      #     tags: |
+      #       guanmaidocker/protoc-toolkit:0.15.5
+      #       ccr.ccs.tencentyun.com/guanmai/protoc-toolkit:0.15.5
 
       # - name: protoc-toolkit
       #   uses: docker/build-push-action@v1
