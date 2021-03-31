@@ -38,7 +38,7 @@ jobs:
           file: elasticsearch/7.10.1/prod.dockerfile
           push: true
           tags: |
-            guanmaidocker:7.10.1-prod.1
+            guanmaidocker/elasticsearch:7.10.1-prod.1
 
       - name: elasticsearch-prod-tencent
         uses: docker/build-push-action@v2
@@ -48,7 +48,7 @@ jobs:
           file: elasticsearch/7.10.1/prod.dockerfile
           push: true
           tags: |
-            ccr.ccs.tencentyun.com/guanmai:7.10.1-prod.1
+            ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-prod.1
 
       # - name: elasticsearch-dev
       #   uses: docker/build-push-action@v2
