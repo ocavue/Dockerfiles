@@ -17,7 +17,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
           repository: ${{ secrets.DOCKER_USERNAME }}/elasticsearch
-          tags: "7.10.1.0"
+          dockerfile: "prod.dockerfile"
+          tags: "7.10.1-prod.1"
+          path: elasticsearch/7.10.1
+
+      - name: elasticsearch
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/elasticsearch
+          dockerfile: "dev.dockerfile"
+          tags: "7.10.1-dev.1"
           path: elasticsearch/7.10.1
 
       # - name: protoc-toolkit
