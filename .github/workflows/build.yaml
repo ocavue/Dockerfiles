@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
           repository: ${{ secrets.DOCKER_USERNAME }}/elasticsearch
           path: elasticsearch/7.10.1
-          dockerfile: "prod.dockerfile"
+          dockerfile: "elasticsearch/7.10.1/prod.dockerfile"
           tags: "7.10.1-prod.1"
 
       - name: elasticsearch-dev
@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
           repository: ${{ secrets.DOCKER_USERNAME }}/elasticsearch
           path: elasticsearch/7.10.1
-          dockerfile: "dev.dockerfile"
+          dockerfile: "elasticsearch/7.10.1/dev.dockerfile"
           tags: "7.10.1-dev.1"
 
       # - name: protoc-toolkit
