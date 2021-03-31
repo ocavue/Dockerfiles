@@ -30,29 +30,16 @@ jobs:
           username: ${{ secrets.TENCENT_DOCKER_USERNAME }}
           password: ${{ secrets.TENCENT_DOCKER_PASSWORD }}
 
-      - name: elasticsearch-prod
-        uses: docker/build-push-action@v2
-        with:
-          platforms: linux/amd64
-          context: elasticsearch/7.10.1/
-          file: elasticsearch/7.10.1/prod.dockerfile
-          push: true
-          tags: |
-            guanmaidocker/elasticsearch:7.10.1-prod.1
-            ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-prod.1
-
-
-      - name: elasticsearch-dev
-        uses: docker/build-push-action@v2
-        with:
-          platforms: linux/amd64
-          context: elasticsearch/7.10.1/
-          file: elasticsearch/7.10.1/dev.dockerfile
-          push: true
-          tags: |
-            guanmaidocker/elasticsearch:7.10.1-dev.1
-            ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-dev.1
-
+      # - name: elasticsearch-prod
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     platforms: linux/amd64
+      #     context: elasticsearch/7.10.1/
+      #     file: elasticsearch/7.10.1/prod.dockerfile
+      #     push: true
+      #     tags: |
+      #       guanmaidocker/elasticsearch:7.10.1-prod.1
+      #       ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-prod.1
 
       # - name: elasticsearch-dev
       #   uses: docker/build-push-action@v2
@@ -62,18 +49,18 @@ jobs:
       #     file: elasticsearch/7.10.1/dev.dockerfile
       #     push: true
       #     tags: |
-      #       guanmaidocker:7.10.1-dev.1
-      #       ccr.ccs.tencentyun.com/guanmai:7.10.1-dev.1
+      #       guanmaidocker/elasticsearch:7.10.1-dev.1
+      #       ccr.ccs.tencentyun.com/guanmai/elasticsearch:7.10.1-dev.1
 
-      # - name: protoc-toolkit
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     platforms: linux/amd64
-      #     context: protoc-toolkit/
-      #     push: true
-      #     tags: |
-      #       guanmaidocker/protoc-toolkit:0.15.4
-      #       ccr.ccs.tencentyun.com/guanmai/protoc-toolkit:0.15.4
+      - name: protoc-toolkit
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64
+          context: protoc-toolkit/
+          push: true
+          tags: |
+            guanmaidocker/protoc-toolkit:0.15.5
+            ccr.ccs.tencentyun.com/guanmai/protoc-toolkit:0.15.5
 
       # - name: protoc-toolkit
       #   uses: docker/build-push-action@v1
