@@ -61,8 +61,8 @@ jobs:
           context: protoc-toolkit/
           push: true
           tags: |
-            guanmaidocker/protoc-toolkit:0.15.7
-            ccr.ccs.tencentyun.com/guanmai/protoc-toolkit:0.15.7
+            guanmaidocker/protoc-toolkit:0.16.0
+            ccr.ccs.tencentyun.com/guanmai/protoc-toolkit:0.16.0
 
       # - name: protoc-toolkit
       #   uses: docker/build-push-action@v1
