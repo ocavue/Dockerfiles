@@ -82,7 +82,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     rm -rf /var/cache/apt/lists
 
 # install /go/bin/protoc-gen-sql
-RUN go get code.guanmai.cn/back_end/protoc-gen-sql
+RUN go get code.guanmai.cn/public_code/protoc-gen-sql
 
 FROM base
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
