@@ -12,6 +12,9 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     mv /tmp/protoc/bin/protoc /usr/local/bin/ && \
     chmod +x /usr/local/bin/protoc
 
+# install /go/bin/protoc-gen-sql
+RUN go get code.guanmai.cn/public_code/protoc-gen-sql
+
 # install /go/bin/protoc-gen-go
 RUN go get google.golang.org/protobuf/cmd/protoc-gen-go
 
@@ -81,11 +84,10 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/apt/lists
 
-# install /go/bin/protoc-gen-sql
-RUN go get code.guanmai.cn/public_code/protoc-gen-sql
 
 FROM base
 COPY --from=builder /usr/local/bin/protoc                   /usr/local/sbin/protoc
+COPY --from=builder /go/bin/protoc-gen-sql                  /usr/local/sbin/protoc-gen-sql
 COPY --from=builder /go/bin/protoc-gen-go                   /usr/local/sbin/protoc-gen-go
 COPY --from=builder /go/bin/protoc-gen-go-grpc              /usr/local/sbin/protoc-gen-go-grpc
 COPY --from=builder /go/bin/protoc-go-inject-tag            /usr/local/sbin/protoc-go-inject-tag
@@ -102,6 +104,5 @@ COPY --from=builder /usr/local/bin/kubectl                  /usr/local/sbin/kube
 COPY --from=builder /usr/local/bin/gomplate                 /usr/local/sbin/gomplate
 COPY --from=builder /go/bin/revive                          /usr/local/sbin/revive
 COPY --from=builder /usr/local/bin/golangci-lint            /usr/local/sbin/golangci-lint
-COPY --from=builder /go/bin/protoc-gen-sql                  /usr/local/sbin/protoc-gen-sql
 RUN ls -lrth /usr/local/sbin/
 
