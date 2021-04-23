@@ -13,7 +13,7 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     chmod +x /usr/local/bin/protoc
 
 # install /go/bin/protoc-gen-sql
-RUN go get code.guanmai.cn/public_code/protoc-gen-sql@0.3.0
+RUN go get code.guanmai.cn/public_code/protoc-gen-sql@v0.3.0
 
 # install /go/bin/protoc-gen-go
 RUN go get google.golang.org/protobuf/cmd/protoc-gen-go
@@ -29,7 +29,7 @@ RUN go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 #     git checkout v0.4.1 && \
 #     git log -n 1 && \
 #     make build
-RUN go get github.com/envoyproxy/protoc-gen-validate@0.5.1
+RUN go get github.com/envoyproxy/protoc-gen-validate@v0.5.1
 
 # install /go/bin/protoc-go-inject-tag
 RUN go get github.com/favadi/protoc-go-inject-tag
