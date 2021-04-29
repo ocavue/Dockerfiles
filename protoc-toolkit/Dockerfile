@@ -13,7 +13,7 @@ RUN curl -L -o /tmp/protoc.zip https://github.com/protocolbuffers/protobuf/relea
     chmod +x /usr/local/bin/protoc
 
 # install /go/bin/protoc-gen-sql
-RUN go get code.guanmai.cn/public_code/protoc-gen-sql@v0.3.0
+RUN go get code.guanmai.cn/public_code/protoc-gen-sql@v0.4.0
 
 # install /go/bin/protoc-gen-go
 RUN go get google.golang.org/protobuf/cmd/protoc-gen-go
